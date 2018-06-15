@@ -88,7 +88,7 @@
 <meta name="keywords" content="无声告白,书,有感">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《无声告白》">
-<meta property="og:url" content="http://csing.github.com/2018/06/12/《无声告白》/index.html">
+<meta property="og:url" content="http://csing.github.com/post/cjifunh57000b3670nhi7mv8b">
 <meta property="og:site_name" content="csIng">
 <meta property="og:description" content="我们终此一生，就是要摆脱他人的期待，找到真正的自己！">
 <meta property="og:locale" content="zh-Hans">
@@ -125,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="http://csing.github.com/2018/06/12/《无声告白》/"/>
+  <link rel="canonical" href="http://csing.github.com/post/cjifunh57000b3670nhi7mv8b"/>
 
 
 
@@ -302,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://csing.github.com/2018/06/12/《无声告白》/">
+    <link itemprop="mainEntityOfPage" href="http://csing.github.com/post/cjifunh57000b3670nhi7mv8b">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="csIng">
@@ -384,8 +384,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/06/12/《无声告白》/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/06/12/《无声告白》/" itemprop="commentsCount"></span>
+                <a href="/post/cjifunh57000b3670nhi7mv8b#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/post/cjifunh57000b3670nhi7mv8b" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -458,7 +458,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/11/ExoPlayer视频播放流程简析/" rel="next" title="ExoPlayer视频播放流程简析（二）">
+              <a href="/post/cjifunh51000536700yui10kt" rel="next" title="ExoPlayer视频播放流程简析（二）">
                 <i class="fa fa-chevron-left"></i> ExoPlayer视频播放流程简析（二）
               </a>
             
@@ -468,7 +468,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/14/ExoPlayer缓冲策略（三）/" rel="prev" title="ExoPlayer缓冲策略（三）">
+              <a href="/post/cjifunh4x00023670nr7kdmny" rel="prev" title="ExoPlayer缓冲策略（三）">
                 ExoPlayer缓冲策略（三） <i class="fa fa-chevron-right"></i>
               </a>
             

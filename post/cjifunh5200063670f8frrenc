@@ -88,7 +88,7 @@
 <meta name="keywords" content="LruCache,源码,分析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LruCache源码思考">
-<meta property="og:url" content="http://csing.github.com/2018/05/17/LruCache源码分析/index.html">
+<meta property="og:url" content="http://csing.github.com/post/cjifunh5200063670f8frrenc">
 <meta property="og:site_name" content="csIng">
 <meta property="og:description" content="LruCache是内存缓存数据存储的经典方案，该存储结构通过删除最近最少使用的数据，以使最常用数据发挥更有效的作用。 LruCache的特点：  最大数据存储容量的限制； 按照数据的访问顺序排序； 最近最少使用的数据的管理； 良好的灵活性。">
 <meta property="og:locale" content="zh-Hans">
@@ -125,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="http://csing.github.com/2018/05/17/LruCache源码分析/"/>
+  <link rel="canonical" href="http://csing.github.com/post/cjifunh5200063670f8frrenc"/>
 
 
 
@@ -302,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://csing.github.com/2018/05/17/LruCache源码分析/">
+    <link itemprop="mainEntityOfPage" href="http://csing.github.com/post/cjifunh5200063670f8frrenc">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="csIng">
@@ -384,8 +384,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/17/LruCache源码分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/05/17/LruCache源码分析/" itemprop="commentsCount"></span>
+                <a href="/post/cjifunh5200063670f8frrenc#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/post/cjifunh5200063670f8frrenc" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -504,7 +504,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/17/关于源码分析的思考/" rel="next" title="关于源码分析的思考">
+              <a href="/post/cjifunh58000c367044rzklba" rel="next" title="关于源码分析的思考">
                 <i class="fa fa-chevron-left"></i> 关于源码分析的思考
               </a>
             
@@ -514,7 +514,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/08/ExoPlayer简析/" rel="prev" title="ExoPlayer简析（一）">
+              <a href="/post/cjifunh4u000136702213p71g" rel="prev" title="ExoPlayer简析（一）">
                 ExoPlayer简析（一） <i class="fa fa-chevron-right"></i>
               </a>
             
