@@ -298,6 +298,239 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://csing.github.com/posts/d847228d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="csIng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="csIng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/d847228d/" itemprop="url">APT简记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-28T20:25:46+08:00">
+                2019-02-28
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-28T20:34:50+08:00">
+                2019-02-28
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/研究/" itemprop="url" rel="index">
+                    <span itemprop="name">研究</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="APT"><a href="#APT" class="headerlink" title="APT"></a>APT</h2><h4 id="APT全称是：Annotation-Processing-Tool"><a href="#APT全称是：Annotation-Processing-Tool" class="headerlink" title="APT全称是：Annotation Processing Tool"></a>APT全称是：Annotation Processing Tool</h4><h4 id="1-什么是注解："><a href="#1-什么是注解：" class="headerlink" title="1. 什么是注解："></a>1. 什么是注解：</h4><p>从JDK5开始,Java增加对元数据的支持，也就是注解，注解与注释是有一定区别的，可以把注解理解为代码里的特殊标记，这些标记可以在编译，类加载，运行时被读取，并执行相应的处理。通过注解开发人员可以在不改变原有代码和逻辑的情况下在源代码中嵌入补充信息。</p>
+<h4 id="2-注解的独立性"><a href="#2-注解的独立性" class="headerlink" title="2. 注解的独立性"></a>2. 注解的独立性</h4><p>​    Annotation本身不影响程序代码的执行，保持其独立性。</p>
+<h4 id="3-注解的分类："><a href="#3-注解的分类：" class="headerlink" title="3. 注解的分类："></a>3. 注解的分类：</h4><p>​    <strong>（1） 元注解</strong></p>
+<p>​        被用来定义注解的注解。</p>
+<p>​        <code>@Retention</code>，<code>@Target</code>，<code>@Documented</code>，<code>@Inherited</code>。</p>
+<p>​    <strong>（2） 标准注解</strong></p>
+<p>​        <code>@Override</code>,<code>@Deprecated</code>,<code>@SuppressWarnings</code>,<code>@SafeVarargs</code>,<code>@FunctionalInterface</code></p>
+<p>​    <strong>（3）自定义注解</strong></p>
+<p>​        如何自定义一个注解？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> butterknife;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> androidx.annotation.IdRes;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.ElementType.FIELD;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.RetentionPolicy.RUNTIME;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Bind a field to the view for the specified ID. The view will automatically be cast to the field</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Retention</span>(RUNTIME) <span class="comment">/**如果不写，默认是CLASS级别*/</span></span><br><span class="line"><span class="meta">@Target</span>(FIELD) <span class="comment">/**如果不写，默认是所有类型*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> BindView &#123;</span><br><span class="line">  <span class="comment">/** View ID to which the field will be bound. */</span></span><br><span class="line">  <span class="meta">@IdRes</span> <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>@Retention</code>用来修饰这是一个什么类型的注解，以及APT在何时处理这个注解。</p>
+<p><strong><code>@Retention</code>的三种类型</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Annotation retention policy.  The constants of this enumerated type</span></span><br><span class="line"><span class="comment"> * describe the various policies for retaining annotations.  They are used</span></span><br><span class="line"><span class="comment"> * in conjunction with the &#123;<span class="doctag">@link</span> Retention&#125; meta-annotation type to specify</span></span><br><span class="line"><span class="comment"> * how long annotations are to be retained.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 1.5</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> RetentionPolicy &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Annotations are to be discarded by the compiler.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    SOURCE,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Annotations are to be recorded in the class file by the compiler</span></span><br><span class="line"><span class="comment">     * but need not be retained by the VM at run time.  This is the default</span></span><br><span class="line"><span class="comment">     * behavior.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    CLASS,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Annotations are to be recorded in the class file by the compiler and</span></span><br><span class="line"><span class="comment">     * retained by the VM at run time, so they may be read reflectively.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@see</span> java.lang.reflect.AnnotatedElement</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    RUNTIME</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>RUNTIME级别的RetentionPolicy可以在CLASS级别使用吗？</p>
+</blockquote>
+<p><code>@Target</code>用来表示这个注解可以使用在哪些地方。比如：类、方法、属性、接口等。可修饰多个。</p>
+<p><strong><code>@Target</code>类型</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @since 1.5</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> ElementType &#123;</span><br><span class="line">    <span class="comment">/** Class, interface (including annotation type), or enum declaration */</span></span><br><span class="line">    TYPE,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Field declaration (includes enum constants) */</span></span><br><span class="line">    FIELD,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Method declaration */</span></span><br><span class="line">    METHOD,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Formal parameter declaration */</span></span><br><span class="line">    PARAMETER,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Constructor declaration */</span></span><br><span class="line">    CONSTRUCTOR,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Local variable declaration */</span></span><br><span class="line">    LOCAL_VARIABLE,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Annotation type declaration */</span></span><br><span class="line">    ANNOTATION_TYPE,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Package declaration */</span></span><br><span class="line">    PACKAGE,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Type parameter declaration</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 1.8</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    TYPE_PARAMETER,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Use of a type</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 1.8</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    TYPE_USE</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-注解的定义"><a href="#4-注解的定义" class="headerlink" title="4. 注解的定义"></a>4. 注解的定义</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> BindView</span><br></pre></td></tr></table></figure>
+<p>仅可用<code>public</code> 和缺省来修饰，不可用<code>protected</code>和<code>private</code></p>
+<h4 id="5-注解方法声明"><a href="#5-注解方法声明" class="headerlink" title="5. 注解方法声明"></a>5. 注解方法声明</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@IdRes</span> <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>（1） 无参</p>
+<p>（2） 方法不能抛异常；</p>
+<p>（3） 返回值类型：</p>
+<p>只能使用基本数据类型和 String,Enum,Class,annotations等数据类型,以及这一些类型的数组。</p>
+<p>（4） 默认值</p>
+<p>​    方法可以有默认返回值，没有默认返回值的方法必须在使用注解时设置值；</p>
+<p>​    <code>int value() default 0;</code></p>
+<h4 id="6-注解的使用"><a href="#6-注解的使用" class="headerlink" title="6. 注解的使用"></a>6. 注解的使用</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@BindView</span>(R.id.fab) FloatingActionButton fab;</span><br></pre></td></tr></table></figure>
+<h4 id="7-如何从注解中获取信息"><a href="#7-如何从注解中获取信息" class="headerlink" title="7. 如何从注解中获取信息"></a>7. 如何从注解中获取信息</h4><p><strong>(1) 通过反射</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bind</span><span class="params">(<span class="keyword">final</span> Activity target)</span></span>&#123;</span><br><span class="line">        bindViews(target, target.getClass().getDeclaredFields(), target.getWindow().getDecorView()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bindViews</span><span class="params">(<span class="keyword">final</span> Object obj, Field[] fields, View rootView)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">final</span> Field field : fields) &#123;</span><br><span class="line">        Annotation annotation = field.getAnnotation(BindView.class);</span><br><span class="line">        <span class="keyword">if</span> (annotation != <span class="keyword">null</span>) &#123;</span><br><span class="line">            BindView bindView = (BindView) annotation;</span><br><span class="line">            <span class="keyword">int</span> id = bindView.value();</span><br><span class="line">            View view = rootView.findViewById(id);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                field.set(obj, view);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(2) 编译时注解</strong></p>
+<h4 id="8-编译时注解的项目搭建"><a href="#8-编译时注解的项目搭建" class="headerlink" title="8.编译时注解的项目搭建"></a>8.编译时注解的项目搭建</h4><p><strong>(1) 添加注解AptAnnotationLibrary(JavaLibrary)，并添加注解：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(ElementType.FIELD)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> BindView &#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(2) 添加注解处理器AptProcessorLibrary(JavaLibrary)</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AutoService</span>(Processor.class)</span><br><span class="line"><span class="meta">@SupportedSourceVersion</span>(SourceVersion.RELEASE_8)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BindProcessor</span> <span class="keyword">extends</span> <span class="title">AbstractProcessor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; implementation <span class="string">'com.google.auto.service:auto-service:1.0-rc4'</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><code>@AutoService(Processor.class)</code>用于自动生成META-INF信息，告诉编译器处理该Processor，作用等同如下：<br><img src="/Users/shuai.cui/Documents/Screen%20Shot%202019-02-26%20at%2017.08.23.png" alt="Screen Shot 2019-02-26 at 17.08.23"></p>
+<p>`@SupportedSourceVersion(SourceVersion.RELEASE_8)用于告诉编译器该Processor支持的版本</p>
+<h4 id="9-BindProcessor中需要执行的操作："><a href="#9-BindProcessor中需要执行的操作：" class="headerlink" title="9. BindProcessor中需要执行的操作："></a>9. <code>BindProcessor</code>中需要执行的操作：</h4><p><strong>（1）告诉该处理器支持的注解：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Set&lt;String&gt; <span class="title">getSupportedAnnotationTypes</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Set&lt;String&gt; result = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">    result.add(BindView.class.getCanonicalName());</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>（2） 处理编译器通知的注解信息：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">process</span><span class="params">(Set&lt;? extends TypeElement&gt; set, RoundEnvironment roundEnvironment)</span> </span>&#123;</span><br><span class="line">    parseBindElements(roundEnvironment.getElementsAnnotatedWith(BindView.class));</span><br><span class="line">    <span class="keyword">return</span> doProcess();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>（3）解析注解信息，并将注解信息放入elements集合中：</strong></p>
+<blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">private</span> Map&lt;TypeElement, Set&lt;Element&gt;&gt; elements;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">parseBindElements</span><span class="params">(Set&lt;? extends Element&gt; bindElements)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (bindElements == <span class="keyword">null</span> || bindElements.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Element element : bindElements) &#123;</span><br><span class="line">        TypeElement enclosingElement = (TypeElement) element.getEnclosingElement();</span><br><span class="line">        Set&lt;Element&gt; set = elements.get(enclosingElement);</span><br><span class="line">        <span class="keyword">if</span> (set == <span class="keyword">null</span>) &#123;</span><br><span class="line">            set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">            elements.put(enclosingElement, set);</span><br><span class="line">        &#125;</span><br><span class="line">        set.add(element);</span><br><span class="line">        System.out.println(<span class="string">"Add element :element name:"</span> + element.getSimpleName() + <span class="string">"\tenclosingElement name:"</span>+enclosingElement.getSimpleName());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(4) 处理注解信息并生成代码：</strong></p>
+<blockquote>
+<p>生成的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">package</span> com.csdroid.demo.apt;</span><br><span class="line">&gt; </span><br><span class="line">&gt; <span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivityBind</span> <span class="keyword">extends</span> <span class="title">MainActivity</span> </span>&#123;</span><br><span class="line">&gt;     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bind</span><span class="params">(MainActivity activity)</span> </span>&#123;</span><br><span class="line">&gt;      activity.tvContent = (android.widget.TextView)activity.findViewById(<span class="number">2131230913</span>);</span><br><span class="line">&gt;      activity.fab = (android.support.design.widget.FloatingActionButton)activity.findViewById(<span class="number">2131230789</span>);</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">doProcess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (elements.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (TypeElement enclosingElement : elements.keySet()) &#123;</span><br><span class="line">        MethodSpec methodSpec = generateMethodSpec(enclosingElement);</span><br><span class="line"></span><br><span class="line">        TypeSpec typeSpec = generateTypeSpec(enclosingElement, methodSpec);</span><br><span class="line"></span><br><span class="line">        generateJavaFile(enclosingElement, typeSpec);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; implementation <span class="string">'com.squareup:javapoet:1.10.0'</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>(5) 生成方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> MethodSpec <span class="title">generateMethodSpec</span><span class="params">(TypeElement enclosingElement)</span> </span>&#123;</span><br><span class="line">    MethodSpec.Builder builder = MethodSpec.methodBuilder(<span class="string">"bind"</span>)</span><br><span class="line">            .addModifiers(Modifier.PUBLIC, Modifier.STATIC)</span><br><span class="line">            .addParameter(ClassName.get(enclosingElement.asType()), <span class="string">"activity"</span>)</span><br><span class="line">            .returns(TypeName.VOID);</span><br><span class="line">    Set&lt;Element&gt; bindSet = elements.get(enclosingElement);</span><br><span class="line">    <span class="keyword">for</span> (Element element : bindSet) &#123;</span><br><span class="line">        builder.addStatement(String.format(Locale.US,<span class="string">"activity.%s = (%s)activity.findViewById(%d)"</span>, element.getSimpleName(), element.asType(), element.getAnnotation(BindView.class).value()));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> builder.build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(6) 生成类：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> TypeSpec <span class="title">generateTypeSpec</span><span class="params">(TypeElement enclosingElement, MethodSpec methodSpec)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> TypeSpec.classBuilder(enclosingElement.getSimpleName() + <span class="string">"Bind"</span>)</span><br><span class="line">                    .superclass(TypeName.get(enclosingElement.asType()))</span><br><span class="line">                    .addModifiers(Modifier.FINAL, Modifier.PUBLIC)</span><br><span class="line">                    .addMethod(methodSpec)</span><br><span class="line">                    .build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(7) 生成同包名下的java文件：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">private boolean generateJavaFile(TypeElement enclosingElement, TypeSpec typeSpec) &#123;</span><br><span class="line">    JavaFile javaFile = JavaFile.builder(elementUtils.getPackageOf(enclosingElement).getQualifiedName().toString(), typeSpec).build();</span><br><span class="line">    try &#123;</span><br><span class="line">        javaFile.writeTo(processingEnv.getFiler());</span><br><span class="line">        return true;</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时将AptProcessor加入App依赖库后编译即可看到生成的代码；</p>
+<p>代码目录：<code>.AptDemo/app/build/generated/source/apt/debug/com/csdroid/demo/apt/MainActivityBind.java</code></p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; annotationProcessor project(&apos;:AptProcessor&apos;)</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="8-如何使用？"><a href="#8-如何使用？" class="headerlink" title="(8) 如何使用？"></a>(8) 如何使用？</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@BindView</span>(R.id.fab)</span><br><span class="line">    <span class="keyword">public</span> FloatingActionButton fab;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@BindView</span>(R.id.tv_content)</span><br><span class="line">    <span class="keyword">public</span> TextView tvContent;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        Bind.bind(<span class="keyword">this</span>);</span><br><span class="line">        fab.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">                Snackbar.make(view, <span class="string">"Replace with your own action"</span>, Snackbar.LENGTH_LONG)</span><br><span class="line">                        .setAction(<span class="string">"Action"</span>, <span class="keyword">null</span>).show();</span><br><span class="line">                tvContent.setText(<span class="string">"Action"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此部分是BindView在App中的使用</p>
+<h4 id="9-如何建立App和生成代码间的联系？"><a href="#9-如何建立App和生成代码间的联系？" class="headerlink" title="(9) 如何建立App和生成代码间的联系？"></a>(9) 如何建立App和生成代码间的联系？</h4><p>创建<code>AptApi</code> android library，并提供bind接口供外部调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Bind</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Map&lt;Class, Method&gt; binds = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bind</span><span class="params">(Activity activity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (activity == <span class="keyword">null</span> || activity.isFinishing()) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Method method = binds.get(activity.getClass());</span><br><span class="line">        <span class="keyword">if</span> (method == <span class="keyword">null</span>) &#123;</span><br><span class="line">            Package pack = activity.getClass().getPackage();</span><br><span class="line">            <span class="keyword">if</span> (pack == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            String className = pack.getName() + <span class="string">"."</span> + activity.getClass().getSimpleName() + <span class="string">"Bind"</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Class bindClass = Class.forName(className);</span><br><span class="line">                method = bindClass.getMethod(<span class="string">"bind"</span>, activity.getClass());</span><br><span class="line">                binds.put(activity.getClass(), method);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (method != <span class="keyword">null</span>) &#123;</span><br><span class="line">                method.invoke(<span class="keyword">null</span>, activity);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>App工程依赖<code>AptApi</code> library</p>
+<blockquote>
+<p><code>implementation project(&#39;:AptApi&#39;)</code></p>
+</blockquote>
+<p>Demo源码：<a href="https://github.com/csIng/BindView" target="_blank" rel="noopener">https://github.com/csIng/BindView</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://csing.github.com/posts/93a28bc9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1441,7 +1674,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1452,7 +1685,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1463,7 +1696,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1501,7 +1734,7 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
